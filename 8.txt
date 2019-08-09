@@ -1,0 +1,6 @@
+  select test_cust.custname,test_sales.revenue from test_cust ,test_sales  where test_cust.custnum=test_sales.custnum and test_sales.revenue=(select max(revenue) from test_sales);
+   select test_cust.custname,test_sales.revenue from test_cust ,test_sales  where test_cust.custnum=test_sales.custnum and test_sales.revenue=(select min(revenue) from test_sales where to_char(trans_dt,'yyyy')=2009);
+    select test_cust.custname,test_sales.revenue from test_cust ,test_sales  where test_cust.custnum=test_sales.custnum and test_sales.revenue=(select max(revenue) from test_sales where prodid=3);
+	    select TOP 2 test_cust.custname, test_sales.revenue from test_cust ,test_sales  where test_cust.custnum=test_sales.custnum and test_cust.gender='F'   order by test_sales.revenue desc ;
+		 select test_cust.custname,test_sales.revenue from test_cust ,test_sales  where test_cust.custnum=test_sales.custnum and test_sales.revenue=(select max(revenue) from test_sales);
+		  select test_cust.gender,sum(test_sales.revenue) from test_cust ,test_sales  where test_cust.custnum=test_sales.custnum group by test_cust.gender;
