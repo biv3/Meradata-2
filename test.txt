@@ -1,0 +1,67 @@
+create table Prash(name varchar(20));
+insert into prash values('CAP GEMINI');
+select * from prash;
+delete from prash;
+select lower(substr(name,1,1)||substr(name,4,4)) from prash;  
+select substr(name,1,4) from prash;
+select lower(name) from prash;
+create table prash1(exam varchar(10));
+insert into prash1 values(1);
+insert into prash1 values(2);
+insert into prash1 values(3);
+insert into prash1 values(4);
+
+select * from prash1;
+select 1,2,3,4 from( select name from prash1) ;
+pivot
+(
+  max(value)
+  for columnname in (Firstname, Amount, PostalCode, LastName, AccountNumber)
+) piv;
+select *
+from
+(
+  select exam
+  from prash1
+) 
+pivot
+(
+ max(exam)
+  for columnname in (1,2,3,4)
+) order by desc;
+select * from prash1
+pivot(3 for 1 in (2, 2, 2) );
+
+create table prash2(id varchar(10),city1 varchar(10),city2 varchar(10));
+insert into prash2(1,'ny','nj');
+insert into prash2(2,'nj','ny');
+select * from prash2;
+delete from prash2;
+update prash2 set city1=city2,city2=city1;
+create table prash3(names varchar(10),city varchar(10),num varchar(10));
+insert into prash3 values('an','ttt',5);
+insert into prash3 values('an','ttt',6);
+insert into prash3 values('an','ttt',7);
+insert into prash3 values('bb','rrr',8);
+insert into prash3 values('bb','rrr',9);
+insert into prash3 values('bb','rrr',10);
+select * from prash3;
+select distinct(names),(select distinct(city) from prash3),num from prash3;
+drop table prash3;
+ select as(SELECT distinct names FROM prash3
+ intersect
+ SELECT distinct names FROM prash3) from prash3;
+  l
+	  select names,city,num from prash3 group by names,city,num;
+create table prash4(names varchar(10),dob date format 'dd-mm-yyyy');
+insert into prash4 values('xxxx','08-08-1985');
+insert into prash4 values('yyyy','09-09-1999');
+insert into prash4 values('zzzz','10-10-2000');
+select * from prash4;
+select names from prash4 where (to_char(current_date,'yyyy')-to_char(dob,'yyyy'))>'21';
+select substr(dob,7,4)-substr(current_date,7,4) from prash4;
+select (to_char(dob,'yyyy')-to_char(current_date,'yyyy'))from prash4;
+select current_date;
+drop table prash4;
+show table prash4;
+create table sales(custnum integer,prodid integer,locid integer,trans_dt date format 'yyyy-mm-dd',quantity integer,revenue decimal 
